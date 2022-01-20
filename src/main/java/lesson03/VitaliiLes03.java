@@ -3,18 +3,18 @@ package lesson03;
  * Java 1. HomeWork 3
  *
  * @author Vitalii L.
- * @version 19.01.2022
+ * @version 20.01.2022
  */
 import java.util.Arrays;
 
 public class VitaliiLes03 {
     public static void main(String[] args) {
-//        taskNumber(1); invertArray();
-//        taskNumber(2); fillArray();
-//        taskNumber(3); changeArray();
-//        taskNumber(4); fillDiagonal();
-//        taskNumber(5); createArr();
-//        taskNumber(6); elementArrayMinMax();
+        taskNumber(1); invertArray();
+        taskNumber(2); fillArray();
+        taskNumber(3); changeArray();
+        taskNumber(4); fillDiagonal();
+        taskNumber(5); createArr();
+        taskNumber(6); elementArrayMinMax();
         taskNumber(7); checkBalance();
         taskNumber(8); arrayShift();
     }
@@ -158,9 +158,9 @@ public class VitaliiLes03 {
 
     //Задание 8 +
     public static void arrayShift() {
-        int n = 5;
+        int n = 9;
 //        int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        int[] arr = { 1, 2, 3, 4};
+        int[] arr = { 1, 2, 3, 4, 5};
 
         System.out.println("Old array - " + Arrays.toString(arr));
         System.out.println("New array if n = " + n + " - " + Arrays.toString(resultArrayShift(arr, n)));
@@ -171,9 +171,9 @@ public class VitaliiLes03 {
         if (n % arr.length == 0){ //при таком количестве циклов результат не изменится
             return arr;
         }
-        n = n % arr.length; //исключаем количество полных циклов, где результат не изменится
-
         int storage = 0; //для хранения переносимого значения
+
+        n = n % arr.length; //исключаем количество полных циклов, где результат не изменится
 
         //Если n положительное, то смещаем вправо
         if (n > 0) {
@@ -188,8 +188,7 @@ public class VitaliiLes03 {
         }
         //Если n положительное, то смещаем влево
         if (n < 0) {
-            n = -n;
-            for (int in = 1; in <= n; in++) {
+            for (int in = 1; in <= -n; in++) {
                 for (int i = 0; i < arr.length; i++) {
                     if (i == 0) {
                         storage = arr[i];
