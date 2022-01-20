@@ -186,7 +186,7 @@ public class VitaliiLes03 {
                 }
             }
         }
-        //Если n положительное, то смещаем влево
+        //Если n отрицательное, то смещаем влево
         if (n < 0) {
             for (int in = 1; in <= -n; in++) {
                 for (int i = 0; i < arr.length; i++) {
