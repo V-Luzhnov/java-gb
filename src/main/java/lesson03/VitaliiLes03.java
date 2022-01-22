@@ -21,6 +21,7 @@ public class VitaliiLes03 {
     public static void taskNumber(int tn) {
         System.out.println((tn == 1?"":"\n") + "Задание " + tn + ".");
     }
+
     //Задание 1 +
     public static void invertArray() {
         int[] arr = { 1, 0, 1, 0, 0, 1 };
