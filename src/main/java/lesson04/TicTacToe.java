@@ -8,7 +8,7 @@ public class TicTacToe {
     final char CHAR_O = 'o';
     final char CHAR_X = 'x';
     final char CHAR_EMPTY = '.';
-    final int SIZE = 5;
+    final int SIZE = 3;
     Random random;
     Scanner scanner;
     char [][] table;
@@ -115,19 +115,18 @@ public class TicTacToe {
                 for (y = 0; y < SIZE; y++) {
                     if (table[x][y] == CHAR_O) {
                         quantity++;
-                    } else if (table[x][y] != CHAR_X) {
+                    } else if (table[x][y] == CHAR_X) {
                         quantity = 0;
                     }
                     if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
                         for (y = 0; y < SIZE; y++) {
-                            if (table[x][y] == CHAR_EMPTY  && !check  && (table[x][y-1] == CHAR_O || table[x][y+1] == CHAR_O)) {
+                            if (table[x][y] == CHAR_EMPTY  && !check  && (table[x][(y-1<0?0:y-1)] == CHAR_O || table[x][(y+1>SIZE-1?SIZE-1:y+1)] == CHAR_O)) {
                                 table[x][y] = CHAR_O;
                                 check = true;
                             }
                         }
                     }
                 }
-                System.out.println("quantity = " + quantity);
             }
         }
 
@@ -137,19 +136,18 @@ public class TicTacToe {
                 for (x = 0; x < SIZE; x++) {
                     if (table[x][y] == CHAR_O) {
                         quantity++;
-                    } else if (table[x][y] != CHAR_X) {
+                    } else if (table[x][y] == CHAR_X) {
                         quantity = 0;
                     }
                     if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
                         for (x = 0; x < SIZE; x++) {
-                            if (table[x][y] == CHAR_EMPTY  && !check && (table[x-1][y] == CHAR_O || table[x+1][y] == CHAR_O)) {
+                            if (table[x][y] == CHAR_EMPTY  && !check && (table[(x-1<0?0:x-1)][y] == CHAR_O || table[(x+1>SIZE-1?SIZE-1:x+1)][y] == CHAR_O)) {
                                 table[x][y] = CHAR_O;
                                 check = true;
                             }
                         }
                     }
                 }
-                System.out.println("quantity = " + quantity);
             }
         }
 
@@ -158,12 +156,12 @@ public class TicTacToe {
             if(!check) {
                 if (table[i][i] == CHAR_O) {
                     quantity++;
-                } else if (table[i][i] != CHAR_X) {
+                } else if (table[i][i] == CHAR_X) {
                     quantity = 0;
                 }
                 if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
                     for (i = 0; i < SIZE; i++) {
-                        if (table[i][i] == CHAR_EMPTY  && !check && (table[i-1][i-1] == CHAR_O || table[i+1][i+1] == CHAR_O)) {
+                        if (table[i][i] == CHAR_EMPTY  && !check && (table[(i-1<0?0:i-1)][(i-1<0?0:i-1)] == CHAR_O || table[(i+1>SIZE-1?SIZE-1:i+1)][(i+1>SIZE-1?SIZE-1:i+1)] == CHAR_O)) {
                             table[i][i] = CHAR_O;
                             check = true;
                         }
@@ -182,7 +180,7 @@ public class TicTacToe {
                 }
                 if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
                     for (i = 0; i < SIZE; i++) {
-                        if (table[i][SIZE - i - 1] == CHAR_EMPTY  && !check && (table[i-1][SIZE - i-2] == CHAR_O || table[i+1][SIZE - i] == CHAR_O)) {
+                        if (table[i][SIZE - i - 1] == CHAR_EMPTY  && !check && (table[(i-1<0?0:i-1)][(SIZE - i-2<0?0:SIZE - i-2)] == CHAR_O || table[(i+1>SIZE-1?SIZE-1:i+1)][(SIZE - i>SIZE-1?SIZE-1:SIZE - i)] == CHAR_O)) {
                             table[i][SIZE - i - 1] = CHAR_O;
                             check = true;
                         }
@@ -197,7 +195,6 @@ public class TicTacToe {
                 y = random.nextInt(SIZE);
             } while (!isCellValid(x, y));
             table[x][y] = CHAR_O;
-            System.out.println("Рандом");
         }
     }
 
