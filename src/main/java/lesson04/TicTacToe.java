@@ -7,7 +7,8 @@ public class TicTacToe {
 
     final char CHAR_O = 'o';
     final char CHAR_X = 'x';
-    final char CHAR_POINT = '.';
+    final char CHAR_EMPTY = '.';
+    final int SIZE = 3;
     Random random;
     Scanner scanner;
     char [][] table;
@@ -17,7 +18,7 @@ public class TicTacToe {
     }
 
     TicTacToe() {
-        table = new char[3][3];
+        table = new char[SIZE][SIZE];
         random = new Random();
         scanner = new Scanner(System.in);
     }
@@ -50,16 +51,16 @@ public class TicTacToe {
     }
 
     void initTable(){
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                table[x][y] = CHAR_POINT;
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                table[x][y] = CHAR_EMPTY;
             }
         }
     }
 
     void printTable() {
-        for (int y = 0; y < 3; y++) {
-            for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < SIZE; y++) {
+            for (int x = 0; x < SIZE; x++) {
                 System.out.print(table[y][x] + " ");
             }
             System.out.println();
@@ -69,7 +70,7 @@ public class TicTacToe {
     void turnHuman(){
         int x,y;
         do {
-            System.out.print("Enter z y [1..3]: ");
+            System.out.print("Enter x| y_ [1.." + SIZE + "]: ");
             x = scanner.nextInt() - 1;
             y = scanner.nextInt() - 1;
         } while (!isCellValid(x,y));
@@ -77,41 +78,214 @@ public class TicTacToe {
     }
 
     void turnAI(){
-        int x,y;
-        do {
-            x = random.nextInt(3);
-            y = random.nextInt(3);
-        } while (!isCellValid(x,y));
-        table[x][y] = CHAR_O;
+        if (itFirstMoveAI()) {
+            makeFirstMoveAI();
+        } else{
+            makeMoveAI();
+        }
+    }
 
+    boolean itFirstMoveAI() {
+        int quantity = 0;
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                if (table[x][y] == CHAR_O) {
+                    quantity++;
+                }
+            }
+        }
+        return quantity == 0;
+    }
+
+    void makeFirstMoveAI(){
+        if (table[SIZE / 2][SIZE / 2] != CHAR_X){
+            table[SIZE / 2][SIZE / 2] = CHAR_O;
+        } else {
+            table[(SIZE / 2)-1][(SIZE / 2)-1] = CHAR_O;
+        }
+    }
+
+    void makeMoveAI() {
+        int x,y,quantity;
+        boolean check = false;
+
+        for (x = 0; x < SIZE; x++) {
+            if (!check) {
+                quantity = 0;
+                for (y = 0; y < SIZE; y++) {
+                    if (table[x][y] == CHAR_O) {
+                        quantity++;
+                    } else if (table[x][y] == CHAR_X) {
+                        quantity = 0;
+                    }
+                    if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
+                        for (y = 0; y < SIZE; y++) {
+                            if (table[x][y] == CHAR_EMPTY  && !check  && (table[x][(y-1<0?0:y-1)] == CHAR_O || table[x][(y+1>SIZE-1?SIZE-1:y+1)] == CHAR_O)) {
+                                table[x][y] = CHAR_O;
+                                check = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (y = 0; y < SIZE; y++) {
+            if (!check) {
+                quantity = 0;
+                for (x = 0; x < SIZE; x++) {
+                    if (table[x][y] == CHAR_O) {
+                        quantity++;
+                    } else if (table[x][y] == CHAR_X) {
+                        quantity = 0;
+                    }
+                    if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
+                        for (x = 0; x < SIZE; x++) {
+                            if (table[x][y] == CHAR_EMPTY  && !check && (table[(x-1<0?0:x-1)][y] == CHAR_O || table[(x+1>SIZE-1?SIZE-1:x+1)][y] == CHAR_O)) {
+                                table[x][y] = CHAR_O;
+                                check = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        quantity = 0;
+        for (int i = 0; i < SIZE; i++) {
+            if(!check) {
+                if (table[i][i] == CHAR_O) {
+                    quantity++;
+                } else if (table[i][i] == CHAR_X) {
+                    quantity = 0;
+                }
+                if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
+                    for (i = 0; i < SIZE; i++) {
+                        if (table[i][i] == CHAR_EMPTY  && !check && (table[(i-1<0?0:i-1)][(i-1<0?0:i-1)] == CHAR_O || table[(i+1>SIZE-1?SIZE-1:i+1)][(i+1>SIZE-1?SIZE-1:i+1)] == CHAR_O)) {
+                            table[i][i] = CHAR_O;
+                            check = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        quantity = 0;
+        for (int i = 0; i < SIZE; i++) {
+            if(!check) {
+                if (table[i][SIZE - i - 1] == CHAR_O) {
+                    quantity++;
+                } else if (table[i][SIZE - i - 1] != CHAR_X) {
+                    quantity = 0;
+                }
+                if (quantity == (SIZE <= 3 ? SIZE - 1 : SIZE - 2)) {
+                    for (i = 0; i < SIZE; i++) {
+                        if (table[i][SIZE - i - 1] == CHAR_EMPTY  && !check && (table[(i-1<0?0:i-1)][(SIZE - i-2<0?0:SIZE - i-2)] == CHAR_O || table[(i+1>SIZE-1?SIZE-1:i+1)][(SIZE - i>SIZE-1?SIZE-1:SIZE - i)] == CHAR_O)) {
+                            table[i][SIZE - i - 1] = CHAR_O;
+                            check = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!check) {
+            do {
+                x = random.nextInt(SIZE);
+                y = random.nextInt(SIZE);
+            } while (!isCellValid(x, y));
+            table[x][y] = CHAR_O;
+        }
     }
 
     boolean isCellValid(int x, int y){
-        if (x < 0 || y < 0 || x > 2 || y > 2) {
+        if (x < 0 || y < 0 || x > SIZE - 1 || y > SIZE - 1) {
             return false;
         }
-        return table[x][y] == CHAR_POINT;
+        return table[x][y] == CHAR_EMPTY;
     }
 
     boolean checkWin(char ch){
-        if (table[0][0] == ch && table[0][1] == ch && table[0][2] == ch) return true;
-        if (table[1][0] == ch && table[1][1] == ch && table[1][2] == ch) return true;
-        if (table[2][0] == ch && table[2][1] == ch && table[2][2] == ch) return true;
+        if (checkRow(ch) || checkColumn(ch) || checkDiagonal(ch)) {
+            return true;
+        }
+        return false;
+    }
 
-        if (table[0][0] == ch && table[1][0] == ch && table[2][0] == ch) return true;
-        if (table[0][1] == ch && table[1][1] == ch && table[2][1] == ch) return true;
-        if (table[0][2] == ch && table[1][2] == ch && table[2][2] == ch) return true;
+    boolean checkRow(char ch){
+        for (int x = 0; x < SIZE; x++) {
+            int quantity = 0;
+            for (int y = 0; y < SIZE; y++) {
+                if (table[x][y] == ch) {
+                    quantity++;
+                    if (winCondition(quantity)) {
+                        return true;
+                    }
+                } else {
+                    quantity = 0;
+                }
+            }
+        }
+        return false;
+    }
 
-        if (table[0][0] == ch && table[1][1] == ch && table[2][2] == ch) return true;
-        if (table[2][0] == ch && table[1][1] == ch && table[0][2] == ch) return true;
+    boolean checkColumn(char ch){
+        for (int y = 0; y < SIZE; y++) {
+            int quantity = 0;
+            for (int x = 0; x < SIZE; x++) {
+                if (table[x][y] == ch) {
+                    quantity++;
+                    if (winCondition(quantity)) {
+                        return true;
+                    }
+                } else {
+                    quantity = 0;
+                }
+            }
+        }
+        return false;
+    }
 
+    boolean checkDiagonal(char ch) {
+        int quantity = 0;
+        for (int i = 0; i < SIZE; i++) {
+            if (table[i][i] == ch) {
+                quantity++;
+                if (winCondition(quantity)) {
+                    return true;
+                }
+            } else {
+            quantity = 0;
+            }
+        }
+        quantity = 0;
+        for (int i = 0; i < SIZE; i++) {
+            if (table[i][SIZE - i - 1] == ch) {
+                quantity++;
+                if (winCondition(quantity)) {
+                    return true;
+                }
+            } else {
+                quantity = 0;
+            }
+        }
+        return false;
+    }
+
+    boolean winCondition(int quantity){
+        if (quantity == SIZE && SIZE <= 3) {
+            return true;
+        }
+        if (quantity == SIZE - 1 && SIZE > 3) {
+            return true;
+        }
         return false;
     }
 
     boolean isTableFull() {
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                if (table[x][y] == CHAR_POINT) {
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                if (table[x][y] == CHAR_EMPTY) {
                     return false;
                 }
             }

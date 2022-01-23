@@ -45,36 +45,14 @@ public class MainClass {
         System.out.println("Игра закончена");
     }
     public static boolean checkWin(char symb) {
-        int pozX = 0;
-        int pozY = 0;
-        for (int i = 0; i < map.length; i++){
-
-            for (int j = 0; j < map.length; j++){
-
-                if(map[i][j] == symb) {
-                    pozY++;
-                    System.out.println("map[" + (i + 1) + "][" + (j + 1) + "]  = " + map[i][j] + " (" + pozY + ")");
-                    if (pozY == 3) {
-                        return true;
-                    }
-                }
-                if(map[j][i] == symb) {
-                    pozX++;
-                    System.out.println("map[" + (j + 1) + "][" + (j + 1) + "]  = " + map[j][i] + " (" + pozX + ")" );
-                    if (pozX == 3) {
-                        return true;
-                    }
-                }
-            }
-        }
-//        if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
-//        if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
-//        if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb) return true;
-//        if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb) return true;
-//        if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb) return true;
-//        if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb) return true;
-//        if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb) return true;
-//        if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb) return true;
+        if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
+        if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
+        if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb) return true;
+        if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb) return true;
+        if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb) return true;
+        if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb) return true;
+        if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb) return true;
+        if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb) return true;
         return false;
     }
     public static boolean isMapFull() {
