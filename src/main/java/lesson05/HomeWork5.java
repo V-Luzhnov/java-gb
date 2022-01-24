@@ -1,5 +1,10 @@
 package lesson05;
-
+/*
+ * Java 1. HomeWork 5
+ *
+ * @author Vitalii Luzhnov.
+ * @version 24.01.2022
+ */
 public class HomeWork5 {
     public static void main(String[] args) {
         Employee[] emplArray = new Employee[5];
