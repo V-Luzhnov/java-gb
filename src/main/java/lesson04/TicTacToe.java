@@ -13,7 +13,7 @@ public class TicTacToe {
     final char CHAR_O = 'o';
     final char CHAR_X = 'x';
     final char CHAR_EMPTY = '.';
-    final int SIZE = 5;
+    final int SIZE = 3;
     Random random;
     Scanner scanner;
     char [][] table;
