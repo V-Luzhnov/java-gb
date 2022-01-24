@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    final int SIZE = 3;
-    final boolean FIRST_MOVE_AI = true;
+    final int SIZE = 3; //Нечетное >= 3
+    final boolean FIRST_MOVE_AI = true; //если false, то первый ход ИИ сделает рандомно
 
     final char CHAR_O = 'o';
     final char CHAR_X = 'x';
