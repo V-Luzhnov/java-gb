@@ -1,5 +1,10 @@
 package lesson04;
-
+/*
+ * Java 1. HomeWork 4
+ *
+ * @author Vitalii L.
+ * @version 24.01.2022
+ */
 import java.util.Random;
 import java.util.Scanner;
 
