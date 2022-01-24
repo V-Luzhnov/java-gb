@@ -10,13 +10,15 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
+    final int SIZE = 3;
+    final boolean FIRST_MOVE_AI = true;
+
     final char CHAR_O = 'o';
     final char CHAR_X = 'x';
     final char CHAR_EMPTY = '.';
-    final int SIZE = 3;
+    char [][] table;
     Random random;
     Scanner scanner;
-    char [][] table;
 
     public static void main (String[] args) {
         new TicTacToe().game();
@@ -83,10 +85,14 @@ public class TicTacToe {
         table[x][y] = CHAR_X;
     }
 
-    void turnAI(){
+    void turnAI() {
         if (itFirstMoveAI()) {
-            makeFirstMoveAI();
-        } else{
+            if (FIRST_MOVE_AI) {
+                makeFirstMoveAI();
+            } else {
+                randomMakeMoveAI();
+            }
+        } else {
             makeMoveAI();
         }
     }
