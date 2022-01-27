@@ -14,7 +14,7 @@ public class HomeWork5 {
         emplArray[3] = new Employee("Igor Smirnov", "Programmer", "i.smirnov@employee.com", "456789123", "90000", 30);
         emplArray[4] = new Employee("Andrey Sviridov", "Security", "a.sviridov@employee.com", "567891234", "50000", 50);
 
-        for (int i = 0; i < emplArray.length; i++ ){
+        for (int i = 0; i < emplArray.length; i++) {
             if (emplArray[i].getAge() > 40) {
                 System.out.println(emplArray[i]);
             }
@@ -30,6 +30,7 @@ class Employee {
     private String salary;
     private int age;
 
+    //Конструктор
     Employee(String fullName, String position, String email, String phone, String salary, int age) {
         this.fullName = fullName;
         this.position = position;
