@@ -9,9 +9,12 @@ class HomeWork6 {
     public static void main(String[] args) {
 
         IAnimal[] animals = {
-                new Cat("Murzik", 200, 0),
+//                new Cat("Murzik", 200, 0),
+//                new Dog("Polkan", 500, 10),
+//                new Cat("Barsik", 200, 0)
+                new Cat("Murzik", 200),
                 new Dog("Polkan", 500, 10),
-                new Cat("Barsik", 200, 0),
+                new Cat("Barsik", 200)
         };
 
         for (IAnimal animal : animals) {
@@ -33,16 +36,24 @@ class Cat extends Animal {
     //Luzhnov 28.01.2022 +
 //    static int count;
     private static int count = 0;
-    //Luzhnov 28.01.2022 -
 
-    Cat(String name, int limitRun, int limitSwim) {
-        super(name, limitRun, limitSwim);
+//    Cat(String name, int limitRun, int limitSwim) {
+//        super(name, limitRun, limitSwim);
+//        count++;
+//    }
+
+    Cat(String name, int limitRun) {
+        super(name, limitRun, -1);
         count++;
     }
 
-    //Luzhnov 28.01.2022 +
     public static int getCountOfCat() {
         return count;
+    }
+
+    @Override
+    public String swim(int distance) {
+        return name + " не любит купаться" ;
     }
 
 //    @Override
