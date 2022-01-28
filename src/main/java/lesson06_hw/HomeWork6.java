@@ -18,48 +18,71 @@ class HomeWork6 {
             System.out.println(animal.run(150));
             System.out.println(animal.swim(3));
         }
-        System.out.println("Котиков: " + Cat.count);
-        System.out.println("Собачек: " + Dog.count);
-        System.out.println("Всего животных: " + (Cat.count + Dog.count));
+        //Luzhnov 28.01.2022 +
+//        System.out.println("Котиков: " + Cat.count);
+//        System.out.println("Собачек: " + Dog.count);
+//        System.out.println("Всего животных: " + (Cat.count + Dog.count));
+        System.out.println("Котиков: " + Cat.getCountOfCat());
+        System.out.println("Собачек: " + Dog.getCountOfDog());
+        System.out.println("Всего животных: " + Animal.getCountOfAnimals());
+        //Luzhnov 28.01.2022 -
     }
 }
 
 class Cat extends Animal {
-    static int count;
+    //Luzhnov 28.01.2022 +
+//    static int count;
+    private static int count = 0;
+    //Luzhnov 28.01.2022 -
 
     Cat(String name, int limitRun, int limitSwim) {
         super(name, limitRun, limitSwim);
         count++;
     }
 
-    @Override
-    public String run(int distance) {
-        return name + (distance > limitRun ? " не " : " ") + "пробежал " + distance + " м";
+    //Luzhnov 28.01.2022 +
+    public static int getCountOfCat() {
+        return count;
     }
 
-    @Override
-    public String swim(int distance) {
-        return name + (distance > limitSwim ? " не " : " ") + "проплыл " + distance + " м";
-    }
+//    @Override
+//    public String run(int distance) {
+//        return name + (distance > limitRun ? " не " : " ") + "пробежал " + distance + " м";
+//    }
+//
+//    @Override
+//    public String swim(int distance) {
+//        return name + (distance > limitSwim ? " не " : " ") + "проплыл " + distance + " м";
+//    }
+    //Luzhnov 28.01.2022 -
 }
 
 class Dog extends Animal {
-    static int count;
+    //Luzhnov 28.01.2022 +
+//    static int count;
+    private static int count = 0;
+    //Luzhnov 28.01.2022 -
 
     Dog(String name, int limitRun, int limitSwim) {
         super(name, limitRun, limitSwim);
         count++;
     }
 
-    @Override
-    public String run(int distance) {
-        return name + (distance > limitRun ? " не " : " ") + "пробежал " + distance + " м";
+    //Luzhnov 28.01.2022 +
+    public static int getCountOfDog() {
+        return count;
     }
 
-    @Override
-    public String swim(int distance) {
-        return name + (distance > limitSwim ? " не " : " ") + "проплыл " + distance + " м";
-    }
+//    @Override
+//    public String run(int distance) {
+//        return name + (distance > limitRun ? " не " : " ") + "пробежал " + distance + " м";
+//    }
+//
+//    @Override
+//    public String swim(int distance) {
+//        return name + (distance > limitSwim ? " не " : " ") + "проплыл " + distance + " м";
+//    }
+    //Luzhnov 28.01.2022 -
 }
 
 interface IAnimal {
@@ -71,12 +94,34 @@ abstract class Animal implements IAnimal {
     protected String name;
     protected int limitRun;
     protected int limitSwim;
+    //Luzhnov 28.01.2022 +
+    private static int count = 0;
+    //Luzhnov 28.01.2022 -
 
     Animal(String name, int limitRun, int limitSwim) {
         this.name = name;
         this.limitRun = limitRun;
         this.limitSwim = limitSwim;
+        //Luzhnov 28.01.2022 +
+        count++;
+        //Luzhnov 28.01.2022 -
     }
+
+    //Luzhnov 28.01.2022 +
+    public static int getCountOfAnimals() {
+        return count;
+    }
+
+    @Override
+    public String run(int distance) {
+        return name + (distance > limitRun ? " не " : " ") + "пробежал " + distance + " м";
+    }
+
+    @Override
+    public String swim(int distance) {
+        return name + (distance > limitSwim ? " не " : " ") + "проплыл " + distance + " м";
+    }
+    //Luzhnov 28.01.2022 -
 
     @Override
     public String toString() {
