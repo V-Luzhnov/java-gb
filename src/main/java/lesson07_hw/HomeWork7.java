@@ -9,11 +9,12 @@ class HomeWork7 {
     public static void main(String[] args) {
         int food = 4; // начальное количество еды в тарелке
         int maxFoodPlate = 5; // максимальное количество еды, которое помещается в тарелку
-        int foodAdd = 2; // количество еды для добавления
+        int foodAdd = 4; // количество еды для добавления
 
         Cat[] cats = {
                 new Cat("Barsik", 1),
-                new Cat("Murzik", 5)
+                new Cat("Murzik", 3),
+                new Cat("Kis-Kis", 1)
         };
 
         Plate plate = new Plate(food, maxFoodPlate);
@@ -49,6 +50,7 @@ class Cat {
     public void eat(Plate plate) {
         if (!isFull) {
             plate.decreaseFood(appetite);
+            isFull = true;
         }
     }
 
@@ -68,7 +70,16 @@ class Plate {
     }
 
     public void decreaseFood(int food) {
-        this.food -= food;
+        if (checkDecreaseFood(food)) {
+            this.food -= food;
+        }
+    }
+
+    public boolean checkDecreaseFood(int food) {
+        if (this.food < food) {
+            return false;
+        }
+        return true;
     }
 
     // Метод добавления еды в тарелку

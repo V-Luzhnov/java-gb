@@ -48,6 +48,7 @@ class Plate {
     private int food;
 
     Plate(int food) {
+
         this.food = food;
     }
 
@@ -60,6 +61,7 @@ class Plate {
 //-1-    }
 
     public void decreaseFood(int food) {
+
         this.food -= food;
     }
 
