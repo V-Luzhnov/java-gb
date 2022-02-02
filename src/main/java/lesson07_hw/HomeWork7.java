@@ -7,16 +7,31 @@ package lesson07_hw;
  */
 class HomeWork7 {
     public static void main(String[] args) {
-        Cat cat = new Cat("Barsik", 1);
-        Plate plate = new Plate(1, 5); //начальное количество еды в тарелке; максимальное количество еды для тарелки
-        System.out.println(cat);
-        System.out.println(plate);
+        int food = 4; // начальное количество еды в тарелке
+        int maxFoodPlate = 5; // максимальное количество еды, которое помещается в тарелку
+        int foodAdd = 2; // количество еды для добавления
 
-        cat.eat(plate);
+        Cat[] cats = {
+                new Cat("Barsik", 1),
+                new Cat("Murzik", 5)
+        };
 
-        plate.addFood(2); //добавлено еды, если не хватило
+        Plate plate = new Plate(food, maxFoodPlate);
 
-        System.out.println(plate);
+        System.out.println("Рыб в тарелке до еды: " + plate);
+
+        for (Cat cat : cats) {
+            cat.eat(plate);
+            System.out.println(cat);
+        }
+
+        System.out.println("Рыб в тарелке после еды: " + plate);
+        System.out.println("Рыб добавлено: " + foodAdd + " р.");
+
+        // добавляем еду, если всем не хватило
+        plate.addFood(foodAdd);
+
+        System.out.println("Рыб в тарелке после добавления: " + plate);
     }
 }
 
@@ -39,7 +54,7 @@ class Cat {
 
     @Override
     public String toString() {
-        return name + ", appetite: " + appetite;
+        return name + ", может съесть: " + appetite + " р.";
     }
 }
 
@@ -65,6 +80,6 @@ class Plate {
 
     @Override
     public String toString() {
-        return "Plate: " + food;
+        return food + " р.";
     }
 }
