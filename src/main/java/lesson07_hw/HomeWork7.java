@@ -7,22 +7,23 @@ package lesson07_hw;
  */
 class HomeWork7 {
     public static void main(String[] args) {
-        int food = 4; // начальное количество еды в тарелке
-        int maxFoodPlate = 5; // максимальное количество еды, которое помещается в тарелку
-        int foodAdd = 4; // количество еды для добавления
+        int food = 30; // начальное количество еды в тарелке
+        int maxFoodPlate = 50; // максимальное количество еды, которое помещается в тарелку
+        int foodAdd = 40; // количество еды для добавления
 
         Cat[] cats = {
-                new Cat("Barsik", 1),
-                new Cat("Murzik", 3),
-                new Cat("Kis-Kis", 1)
+                new Cat("Barsik", 15),
+                new Cat("Murzik", 10),
+                new Cat("Kotik", 20)
         };
 
         Plate plate = new Plate(food, maxFoodPlate);
 
         System.out.println("Рыб в тарелке до еды: " + plate);
+        System.out.println("Начали есть");
 
         for (Cat cat : cats) {
-            cat.eat(plate);
+            cat.eat(plate, false);
             System.out.println(cat);
         }
 
@@ -31,6 +32,14 @@ class HomeWork7 {
 
         // добавляем еду, если всем не хватило
         plate.addFood(foodAdd);
+
+        System.out.println("Рыб в тарелке до еды: " + plate);
+        System.out.println("Начали есть");
+
+        for (Cat cat : cats) {
+            cat.eat(plate, false);
+            System.out.println(cat);
+        }
 
         System.out.println("Рыб в тарелке после добавления: " + plate);
     }
@@ -47,16 +56,16 @@ class Cat {
         isFull = false;
     }
 
-    public void eat(Plate plate) {
+    public void eat(Plate plate, boolean isFull2) {
+        isFull = isFull2;
         if (!isFull) {
-            plate.decreaseFood(appetite);
-            isFull = true;
+            isFull = plate.decreaseFood(appetite);
         }
     }
 
     @Override
     public String toString() {
-        return name + ", может съесть: " + appetite + " р.";
+        return name + ", может съесть: " + appetite + " р., " + "cытость: " + isFull;
     }
 }
 
@@ -69,16 +78,11 @@ class Plate {
         this.maxFoodPlate = maxFoodPlate;
     }
 
-    public void decreaseFood(int food) {
-        if (checkDecreaseFood(food)) {
-            this.food -= food;
-        }
-    }
-
-    public boolean checkDecreaseFood(int food) {
-        if (this.food < food) {
+    public boolean decreaseFood(int food1) {
+        if (food < food1) {
             return false;
         }
+        food -= food1;
         return true;
     }
 
