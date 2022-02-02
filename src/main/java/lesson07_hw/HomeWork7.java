@@ -7,12 +7,14 @@ package lesson07_hw;
  */
 class HomeWork7 {
     public static void main(String[] args) {
-        Cat cat = new Cat("Barsik", 5);
-        Plate plate = new Plate(10);
+        Cat cat = new Cat("Barsik", 1);
+        Plate plate = new Plate(1, 5); //начальное количество еды в тарелке; максимальное количество еды для тарелки
         System.out.println(cat);
         System.out.println(plate);
 
         cat.eat(plate);
+
+        plate.addFood(2); //добавлено еды, если не хватило
 
         System.out.println(plate);
     }
@@ -30,7 +32,9 @@ class Cat {
     }
 
     public void eat(Plate plate) {
-        plate.decreaseFood(appetite);
+        if (!isFull) {
+            plate.decreaseFood(appetite);
+        }
     }
 
     @Override
@@ -41,13 +45,22 @@ class Cat {
 
 class Plate {
     private int food;
+    private int maxFoodPlate;
 
-    Plate(int food) {
+    Plate(int food, int maxFoodPlate) {
         this.food = food;
+        this.maxFoodPlate = maxFoodPlate;
     }
 
     public void decreaseFood(int food) {
         this.food -= food;
+    }
+
+    // Метод добавления еды в тарелку
+    public void addFood(int food) {
+        if (this.food + food <= maxFoodPlate) {
+            this.food += food;
+        }
     }
 
     @Override
