@@ -11,29 +11,39 @@ public class Lesson7HomeWork {
                 new Cat("Kotik", 20)
         };
 
-        int allAppetite = 0;
-        for (Cat cat : cats) {
-            allAppetite += cat.getAppetite();
-        }
-//        for (int i = 0; i < cats.length; i++) {
-//            allAppetite += cats[i].getAppetite();
+//        int allAppetite = 0;
+//        for (Cat cat : cats) {
+//            allAppetite += cat.getAppetite();
 //        }
-        System.out.println("Общий аппетит: " + allAppetite);
+//        System.out.println("Общий аппетит: " + allAppetite);
+        System.out.println("Запас еды: " + foodAdd);
 
         Plate plate = new Plate(food);
         System.out.println("Рыб в тарелке до еды: " + plate);
         System.out.println("Начали есть");
 
+        boolean catHungry = false;
         for (int i = 0; i < cats.length; i++) {
             cats[i].eat(plate);
             System.out.println(cats[i]);
+            if (!cats[i].getIsFull()) {
+                catHungry = true;
+            }
         }
 
         System.out.println("Рыб в тарелке после еды: " + plate);
 
-        // добавляем еду, если всем не хватило
-        plate.addFood(foodAdd);
+        // добавляем еду, если есть голодный кот
+        if (catHungry) {
+            plate.addFood(foodAdd);
+            System.out.println("Начали есть");
+            for (int i = 0; i < cats.length; i++) {
+                cats[i].eat(plate);
+                System.out.println(cats[i]);
+            }
+        }
 
+        System.out.println("Рыб в тарелке после еды: " + plate);
 
     }
 }
@@ -47,15 +57,20 @@ class Cat {
     Cat(String name, int appetite) {
         this.name = name;
         this.appetite = appetite;
-        isFull = false;
+        this.isFull = false;
     }
 
-    public int getAppetite() {
-        return appetite;
+    public boolean getIsFull() {
+        return isFull;
     }
+
+//    public int getAppetite() {
+//        return appetite;
+//    }
 
     public void eat(Plate plate) {
-        isFull = plate.decreaseFood(appetite);
+
+        this.isFull = (!this.isFull? plate.decreaseFood(appetite): this.isFull);
     }
 
     @Override
@@ -74,11 +89,9 @@ class Plate {
     public boolean decreaseFood(int food) {
         int thisFood = this.food;
         if ((thisFood -= food) < 0) {
-            System.out.println("Рыбы в тарелке осталось: " + this.food);
             return false;
         }
         this.food -= food;
-        System.out.println("Рыбы в тарелке осталось: " + this.food);
         return true;
     }
 
@@ -86,7 +99,7 @@ class Plate {
     public void addFood(int foodAdd) {
         System.out.println("Добавлено: " + foodAdd);
         this.food += foodAdd;
-        System.out.println("После добавления в тарелке: " + this.food);
+        System.out.println("Рыб в тарелке после добавления: " + this.food);
     }
 
     @Override
