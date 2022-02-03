@@ -1,5 +1,10 @@
 package lesson7_hw;
-
+/**
+ * Java 1. HomeWork 7
+ *
+ * @author Vitalii Luzhnov
+ * @version 03.02.2022
+ */
 public class Lesson7HomeWork {
     public static void main(String[] args) {
 
