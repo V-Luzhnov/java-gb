@@ -14,7 +14,7 @@ class HomeWork6 {
 //                new Cat("Barsik", 200, 0)
                 new Cat("Murzik", 200),
                 new Dog("Polkan", 500, 10),
-                new Cat("Barsik", 200)
+                new Cat("Barsik", 100)
         };
 
         for (IAnimal animal : animals) {
@@ -42,6 +42,13 @@ class Cat extends Animal {
 //        count++;
 //    }
 
+    /* Тут выполняется перегрузка конструктора,
+       т.к. кот плавть не умеет и параметр limitSwim не имеет смысла.
+       Можно этого не делать, но для красоты лучше сделать. */
+    Cat(String name, int limitRun, int limitSwim) {
+        super(name, limitRun, limitSwim);
+    }
+
     Cat(String name, int limitRun) {
         super(name, limitRun, -1);
         count++;
@@ -51,6 +58,7 @@ class Cat extends Animal {
         return count;
     }
 
+    /* Переопределяем метод swim у кота, т.е. не зависимо от distance метод swim пишет одно и тоже. */
     @Override
     public String swim(int distance) {
         return name + " не любит купаться" ;

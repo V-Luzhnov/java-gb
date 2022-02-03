@@ -17,6 +17,7 @@ public class MainClass {
     public static char[][] map;
     public static Scanner sc = new Scanner(System.in);
     public static Random rand = new Random();
+
     public static void main(String[] args) {
         initMap();
         printMap();
@@ -44,6 +45,7 @@ public class MainClass {
         }
         System.out.println("Игра закончена");
     }
+
     public static boolean checkWin(char symb) {
         if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
         if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
